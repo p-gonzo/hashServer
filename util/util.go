@@ -3,8 +3,9 @@ package util
 import (
 	"crypto/sha512"
 	"encoding/base64"
-	"hashServer/state"
 	"time"
+
+	"github.com/p-gonzo/hashServer/state"
 )
 
 //EncryptPassword Helper function to encrypt a password

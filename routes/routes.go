@@ -2,11 +2,12 @@ package routes
 
 import (
 	"encoding/json"
-	"hashServer/state"
-	"hashServer/util"
 	"io"
 	"net/http"
 	"time"
+
+	"github.com/p-gonzo/hashServer/state"
+	"github.com/p-gonzo/hashServer/util"
 )
 
 //the stats struct is used to send a JSON object back to the client on the '/stats' endpoint
@@ -35,7 +36,7 @@ func HashHandlerFunc(w http.ResponseWriter, req *http.Request) {
 		if err != nil {
 			panic(err)
 		}
-		password := req.Form.Get("password")
+		password := req.PostFormValue("password")
 
 		//time.sleep is okay to use here
 		//the HTTP handler is run in a separate goroutine for each request so it is non-blocking

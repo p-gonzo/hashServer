@@ -1,10 +1,12 @@
 package server
 
 import (
-	"hashServer/middleware"
-	"hashServer/routes"
 	"io"
 	"net/http"
+
+	"github.com/p-gonzo/hashServer/middleware"
+
+	"github.com/p-gonzo/hashServer/routes"
 )
 
 //CreateHTTPServerWithRoutes returns a reference so caller can invoke methods on the server instance

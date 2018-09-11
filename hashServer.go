@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"hashServer/server"
 	"log"
 	"time"
+
+	"github.com/p-gonzo/hashServer/server"
 )
 
 //Application entrypoint

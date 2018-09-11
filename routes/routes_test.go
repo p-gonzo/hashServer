@@ -12,7 +12,6 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
-	"strconv"
 	"strings"
 	"testing"
 	"time"
@@ -21,25 +20,24 @@ import (
 //TestHashHandlerFunc
 func TestHashHandlerFunc(t *testing.T) {
 
-	form := url.Values{}
-	form.Add("password", "angryMonkey")
-
-	// Create a request to pass to our handler. We don't have any query parameters for now, so we'll
-	// pass 'nil' as the third parameter.
-	req, err := http.NewRequest("POST", "/hash", strings.NewReader(form.Encode()))
-	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-	req.Header.Add("Content-Length", strconv.Itoa(len(form.Encode())))
-	if err != nil {
-		t.Fatal(err)
-	}
+	//create a separate goroutine for 10 concurrent requests
 	for i := 0; i < 10; i++ {
 		go func() {
-			// We create a ResponseRecorder (which satisfies http.ResponseWriter) to record the response.
+			form := url.Values{}
+			form.Add("password", "angryMonkey")
+
+			// Create a request to pass to our handler. We don't have any query parameters for now, so we'll
+			// pass 'nil' as the third parameter.
+			req, err := http.NewRequest("POST", "/hash", strings.NewReader(form.Encode()))
+			req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+			if err != nil {
+				t.Fatal(err)
+			}
+			// We create a ResponseRecorder and define our handler function
 			rr := httptest.NewRecorder()
 			handler := http.HandlerFunc(HashHandlerFunc)
 
-			// Our handlers satisfy http.Handler, so we can call their ServeHTTP method
-			// directly and pass in our Request and ResponseRecorder.
+			//call ServeHTTP method and pass in our Request and ResponseRecorder.
 			handler.ServeHTTP(rr, req)
 			// Check the status code is what we expect.
 			if status := rr.Code; status != http.StatusOK {
@@ -80,7 +78,7 @@ func TestStatsHandlerFunc(t *testing.T) {
 			status, http.StatusOK)
 	}
 
-	// Check the response body is what we expect.
+	// Check the JSON response is what we expect.
 	var expected float64
 	expected = 10
 	var data map[string]interface{}
