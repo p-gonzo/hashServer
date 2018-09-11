@@ -1,6 +1,6 @@
+//Package state is used to manage the Application state and provide an interface to manage it
 package state
 
-//Application state and interface
 var totalConnections = 0
 var averageHashTime = 0
 

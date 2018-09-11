@@ -1,10 +1,3 @@
-//routes_test.go
-
-//TODO:
-//Check for JSON body (response of /stats)
-//Check form body (request for /hash)
-//Check time to respond
-
 package routes
 
 import (
@@ -20,7 +13,7 @@ import (
 //TestHashHandlerFunc
 func TestHashHandlerFunc(t *testing.T) {
 
-	//create a separate goroutine for 10 concurrent requests
+	//create a separate goroutine for 10 concurrent POST requests
 	for i := 0; i < 10; i++ {
 		go func() {
 			form := url.Values{}
@@ -84,6 +77,7 @@ func TestStatsHandlerFunc(t *testing.T) {
 	if err2 != nil {
 		panic(err2)
 	}
+	//access the 'total' property on our JSON object
 	value := data["total"].(float64)
 	if value != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",

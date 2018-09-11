@@ -32,6 +32,7 @@ func RecoveryMiddleware(next http.Handler) http.Handler {
 }
 
 //TESTING ONLY, NOT IMPLEMENTED IN PRODUCTION
+//TimeLogMiddleware is used to calculate the response time to complete each request at the '/hash' endpoint
 func TimeLogMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now() //timestamp the beginning of the hashing function
