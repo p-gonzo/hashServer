@@ -21,7 +21,7 @@ func CreateHTTPServerWithRoutes() *http.Server {
 	http.Handle("/stats", middleware.RecoveryMiddleware((statsHandler)))
 
 	//a GET request to the '/shutdown' route will invoke a graceful shutdown
-	//without interupting any active connections
+	//without interrupting any active connections
 	//https://golang.org/pkg/net/http/#Server.Shutdown
 	http.HandleFunc("/shutdown", func(w http.ResponseWriter, r *http.Request) {
 		io.WriteString(w, "Shutdown Request Received ")
