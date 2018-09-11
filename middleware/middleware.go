@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-//RecoveryMiddleware is used to recover from an HTTP panic
+//RecoveryMiddleware is used to recover from an HTTP error
 func RecoveryMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		var err error
@@ -31,7 +31,6 @@ func RecoveryMiddleware(next http.Handler) http.Handler {
 	})
 }
 
-//TimeLogMiddleware logs the time it takes to complete a request
 //TESTING ONLY, NOT IMPLEMENTED IN PRODUCTION
 func TimeLogMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

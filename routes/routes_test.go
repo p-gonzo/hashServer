@@ -26,14 +26,13 @@ func TestHashHandlerFunc(t *testing.T) {
 			form := url.Values{}
 			form.Add("password", "angryMonkey")
 
-			// Create a request to pass to our handler. We don't have any query parameters for now, so we'll
-			// pass 'nil' as the third parameter.
+			// Create a request to pass to our handler with the form value
 			req, err := http.NewRequest("POST", "/hash", strings.NewReader(form.Encode()))
 			req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 			if err != nil {
 				t.Fatal(err)
 			}
-			// We create a ResponseRecorder and define our handler function
+			//Create a ResponseRecorder and define our handler function
 			rr := httptest.NewRecorder()
 			handler := http.HandlerFunc(HashHandlerFunc)
 
@@ -58,8 +57,7 @@ func TestHashHandlerFunc(t *testing.T) {
 }
 
 func TestStatsHandlerFunc(t *testing.T) {
-	// Create a request to pass to our handler. We don't have any query parameters for now, so we'll
-	// pass 'nil' as the third parameter.
+	// Create a request to pass to our handler.
 	req, err := http.NewRequest("GET", "/stats", nil)
 	if err != nil {
 		t.Fatal(err)
