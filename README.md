@@ -20,7 +20,7 @@ A request can be made to the `/shutdown` endpoint and the server will invoke a g
 
 ## Installation
 
-`go get github.com/user/package`
+`go get github.com/p-gonzo/hashServer`
 
 ## Usage
 
